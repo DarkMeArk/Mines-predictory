@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mines Predictor - Android App</title>
+    <!-- Bootstrap CSS from Replit CDN -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <style>
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--bs-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .app-screenshot {
+            border-radius: 1rem;
+            border: 1px solid var(--bs-border-color);
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        
+        .download-btn {
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-section {
+            background-color: var(--bs-dark-bg-subtle);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .steps-container {
+            counter-reset: step-counter;
+        }
+        
+        .step-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: var(--bs-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .mentor-credit {
+            font-style: italic;
+            color: var(--bs-success);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Mines Predictor</h1>
+            <p class="lead">Android App for Bet939</p>
+            <div class="mentor-credit">
+                <small>Developed with mentorship from Kaleem Durrani</small>
+            </div>
+        </header>
+        
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <h2>Predict Safe Moves with 100% Accuracy</h2>
+                <p class="lead">Our Android app gives you a powerful edge when playing Mines on bet939. Using advanced algorithms, it predicts safe moves with perfect accuracy when seed data is available.</p>
+                <p>The app works as an overlay that sits on top of your browser, providing real-time predictions without being detected by the website.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="badge bg-success p-2">Stealth Mode</div>
+                    <div class="badge bg-info p-2">Seed Verification</div>
+                    <div class="badge bg-warning p-2">Auto-Prediction</div>
+                    <div class="badge bg-primary p-2">Universal Compatibility</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="../static/img/android-screenshot.jpg" alt="App Screenshot" class="app-screenshot">
+            </div>
+        </div>
+        
+        <div class="download-section text-center">
+            <h2 class="mb-4">Download the Android APK</h2>
+            <p class="mb-4">Get the latest version with all features included:</p>
+            <div class="d-grid gap-2 col-md-8 mx-auto">
+                <a href="/download-android-apk" class="btn btn-lg btn-success download-btn" style="font-size: 1.5rem; padding: 1rem 2rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    DOWNLOAD APK NOW (v1.0.0)
+                </a>
+            </div>
+            <div class="alert alert-info col-md-8 mx-auto mt-3">
+                <strong>Direct Download Link:</strong><br>
+                <a href="/download-android-apk" class="text-decoration-underline">https://minespredictor.replit.app/download-android-apk</a>
+            </div>
+            <div class="mt-3 text-secondary">
+                <small>File size: 2.3 MB • Updated: May 2, 2025</small>
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-md-4 text-center mb-4">
+                <div class="feature-icon">🔮</div>
+                <h4>Perfect Prediction</h4>
+                <p>When a game seed is available, the app can predict mine positions with 100% accuracy.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <div class="feature-icon">🎯</div>
+                <h4>Smart Algorithm</h4>
+                <p>Even without seeds, our probability algorithm gives you the safest possible moves.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <div class="feature-icon">🛡️</div>
+                <h4>Undetectable Overlay</h4>
+                <p>Run in stealth mode without triggering any security features on the website.</p>
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-lg-6 mb-4">
+                <h3>Installation Instructions</h3>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <h5>Download the APK</h5>
+                        <p>Click the download button above to get the latest APK file.</p>
+                    </div>
+                    <div class="step-item">
+                        <h5>Allow Unknown Sources</h5>
+                        <p>Go to Settings → Security → Unknown Sources and allow installation from this source.</p>
+                    </div>
+                    <div class="step-item">
+                        <h5>Install the App</h5>
+                        <p>Open the downloaded APK and tap Install.</p>
+                    </div>
+                    <div class="step-item">
+                        <h5>Grant Permissions</h5>
+                        <p>When prompted, grant all required permissions including Display over other apps and Accessibility Service.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3>How to Use with Bet939</h3>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <h5>Launch the App</h5>
+                        <p>Open the Mines Predictor app first.</p>
+                    </div>
+                    <div class="step-item">
+                        <h5>Enable Overlay Mode</h5>
+                        <p>Tap the "Enable Overlay" button to activate the floating window.</p>
+                    </div>
+                    <div class="step-item">
+                        <h5>Open Bet939</h5>
+                        <p>Launch your browser and navigate to bet939's Mines game.</p>
+                    </div>
+                    <div class="step-item">
+                        <h5>Auto-Prediction</h5>
+                        <p>The app will automatically detect new games and show you safe moves.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">Screenshots</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <img src="../static/img/screenshot1.jpg" alt="App Screenshot 1" class="app-screenshot">
+                                <p class="text-center">Overlay Mode</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <img src="../static/img/screenshot2.jpg" alt="App Screenshot 2" class="app-screenshot">
+                                <p class="text-center">Seed Verification</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <img src="../static/img/screenshot3.jpg" alt="App Screenshot 3" class="app-screenshot">
+                                <p class="text-center">Safe Move Prediction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">Frequently Asked Questions</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        Is this app detectable by bet939?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        No, the app uses a stealth overlay technique that is completely undetectable. It doesn't modify any browser data or interact directly with the website.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        How accurate are the predictions?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        When using seed verification, the predictions are 100% accurate. When using probability analysis, the app will show you the move with the lowest risk possible.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                        Does it work with all Android devices?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Yes, the app is compatible with all Android phones, with special optimization for Realme devices. It requires Android 8.0 or higher.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                        Who is Kaleem Durrani?
+                                    </button>
+                                </h2>
+                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Kaleem Durrani is the mentor who provided guidance throughout the development of this application. His expertise in game prediction algorithms was instrumental in creating this tool.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="mt-5 pt-5 border-top text-center">
+            <p>Mines Predictor App for Bet939 • Version 1.0.0</p>
+            <div class="mentor-credit">
+                <p>Developed with mentorship from Kaleem Durrani</p>
+            </div>
+            <p class="mt-3">
+                <a href="/" class="btn btn-outline-primary">Back to Main Page</a>
+            </p>
+        </footer>
+    </div>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+          </html>
