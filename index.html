@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mines Helper for Bet939</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid py-2">
+        <header class="d-flex justify-content-between align-items-center pb-2 mb-3 border-bottom">
+            <h2 class="fw-bold text-warning">Mines Helper <span class="badge bg-info">Bet939</span></h2>
+            <div>
+                <a href="/download-android-apk" class="btn btn-sm btn-danger me-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    Download APK
+                </a>
+                <a href="/android" class="btn btn-sm btn-success me-2">Android Info</a>
+                <button id="toggleOverlayMode" class="btn btn-sm btn-outline-light">Toggle Overlay Mode</button>
+            </div>
+        </header>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-3 game-card">
+                    <div class="card-header bg-dark">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mines-counts">
+                                <span class="gem-icon">💎</span> <span id="safeTilesDisplay">8</span>
+                                <span class="mine-icon ms-3">💣</span> <span id="minesDisplay">17</span>
+                            </div>
+                            <div class="mines-settings">
+                                <label for="minesCountInput" class="form-label me-2">Mines:</label>
+                                <div class="d-inline-flex align-items-center">
+                                    <button id="decreaseMines" class="btn btn-sm btn-danger">-</button>
+                                    <input type="number" id="minesCountInput" class="form-control form-control-sm mx-2" min="2" max="20" value="17" style="width: 60px;">
+                                    <button id="increaseMines" class="btn btn-sm btn-success">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Multipliers display, similar to Bet939 UI -->
+                        <div class="multipliers-row mt-2 text-center">
+                            <div class="multiplier-badge">3.03X</div>
+                            <div class="multiplier-badge">10.39X</div>
+                            <div class="multiplier-badge">39.83X</div>
+                            <div class="multiplier-badge">175.29X</div>
+                            <div class="multiplier-badge">920.28X</div>
+                        </div>
+                    </div>
+                    <div class="card-body bg-dark-subtle">
+                        <div class="board-container">
+                            <div id="gameBoard" class="bet939-board">
+                                <!-- Game board will be rendered here by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="controls d-flex justify-content-between mt-3">
+                            <div>
+                                <button id="analyzeButton" class="btn btn-primary">
+                                    Analyze Board
+                                    <span id="loadingSpinner" class="spinner-border spinner-border-sm ms-1" role="status" aria-hidden="true"></span>
+                                </button>
+                                <button id="clearButton" class="btn btn-secondary ms-2">Clear Board</button>
+                                <button id="restartGameButton" class="btn btn-warning ms-2">Open Bet939</button>
+                            </div>
+                            <div>
+                                <button id="autoPredictButton" class="btn btn-success">
+                                    Enable Auto-Prediction
+                                </button>
+                                <span class="badge bg-danger ms-2">Auto: <span id="autoPredictStatus">OFF</span></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Seed display, like in Bet939 -->
+                        <div class="seed-display mt-3 d-flex align-items-center">
+                            <span class="seed-icon me-2">🔄</span>
+                            <span class="seed-label">Last seed:</span>
+                            <code id="currentSeedDisplay" class="ms-1 seed-code">-</code>
+                            <button id="verifySeedButton" class="btn btn-sm btn-info ms-2">Verify</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Provably Fair Verification (Modal style) -->
+                <div class="card mb-3" id="verificationCard">
+                    <div class="card-header bg-dark">
+                        <h5 class="mb-0 text-center">Blockchain Hash Verification</h5>
+                    </div>
+                    <div class="card-body bg-dark">
+                        <div class="mb-3">
+                            <label for="serverSeedInput" class="form-label">Server Seed / Blockchain Seed</label>
+                            <input type="text" class="form-control" id="serverSeedInput" placeholder="Enter seed from Bet939">
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientSeedInput" class="form-label">Client Seed (optional)</label>
+                            <input type="text" class="form-control" id="clientSeedInput" placeholder="Enter client seed">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nonceInput" class="form-label">Nonce/Round ID (optional)</label>
+                            <input type="text" class="form-control" id="nonceInput" placeholder="Enter nonce or round ID">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button id="verifyFairButton" class="btn btn-success">Verify & Predict</button>
+                            <button id="provablyFairInfoButton" class="btn btn-outline-info">How Provably Fair Works</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="recommendationsContainer" class="card mb-3">
+                    <div class="card-header bg-dark">
+                        <h5 class="mb-0">Analysis Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="analysisResults"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header bg-dark d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Instructions</h5>
+                        <button class="btn btn-sm btn-outline-info" data-bs-toggle="collapse" data-bs-target="#instructionsCollapse">Show/Hide</button>
+                    </div>
+                    <div class="card-body collapse show" id="instructionsCollapse">
+                        <ol>
+                            <li>Set the number of mines (2-20) to match your game</li>
+                            <li><strong>Auto Mode (Recommended):</strong>
+                                <ul>
+                                    <li>The tool automatically activates overlay mode when Mines is detected</li>
+                                    <li>All seed data (server seed, client seed, and nonce) is automatically extracted</li>
+                                    <li>Pattern analysis identifies 100% safe moves based on previous games</li>
+                                    <li>Prediction happens immediately when a new game starts</li>
+                                </ul>
+                            </li>
+                            <li>Manual Mode (only if Auto Mode doesn't work):
+                                <ul>
+                                    <li>Copy the seed from Bet939's verification page</li>
+                                    <li>Paste it into the Server Seed field</li>
+                                    <li>Click "Verify & Predict" to see all mine positions</li>
+                                </ul>
+                            </li>
+                            <li>The tool stores previous game results for easy reference</li>
+                            <li>Toggle Overlay Mode to keep the helper visible while playing</li>
+                        </ol>
+                        <div class="alert alert-success">
+                            <strong>Auto-prediction is ON by default!</strong> The tool automatically detects new games and predicts safe moves.
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>Remember:</strong> This tool only provides probabilities based on visible information. Always gamble responsibly.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3">
+                    <div class="card-header bg-dark">
+                        <h5 class="mb-0">Legend</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap legend-container">
+                            <div class="legend-item">
+                                <div class="legend-icon question-mark">?</div>
+                                <span>Unknown Tile</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-icon gem-tile">💎</div>
+                                <span>Safe Tile (Gem)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-icon mine-tile">💣</div>
+                                <span>Mine</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-icon safe-move">✅</div>
+                                <span>Safe Move (100%)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-icon risky-move">⚠️</div>
+                                <span>Risky Move</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3">
+                    <div class="card-header bg-dark">
+                        <h5 class="mb-0">Verification Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="verificationResultsContainer" class="text-center">
+                            <p class="text-muted">No verification performed yet</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Previous Game Results -->
+                <div class="card mb-3">
+                    <div class="card-header bg-dark">
+                        <h5 class="mb-0">Previous Games</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="previousGamesContainer" class="text-center">
+                            <p class="text-muted">No previous games recorded yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="pt-2 mt-3 text-muted border-top text-center">
+            <small>Helper Tool for Bet939 Mines Game | Not affiliated with Bet939</small>
+            <div class="mt-1 text-success" style="font-style: italic;">
+                <small>Developed with mentorship from Kaleem Durrani</small>
+            </div>
+            <div class="mt-1">
+                <a href="/android" class="btn btn-sm btn-success">Get Android Overlay App</a>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/minesweeper_new.js') }}"></script>
+</body>
+</html>
