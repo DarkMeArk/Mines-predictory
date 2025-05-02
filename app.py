@@ -29,6 +29,11 @@ def download_apk():
     """Provide direct download link for the Android APK."""
     # Serve the APK file from the static directory
     apk_path = os.path.join(app.static_folder, 'apk', 'mines_predictor_v1.0.0.apk')
+    
+    # Check if the APK file exists
+    if not os.path.exists(apk_path):
+        return render_template('download.html', error="APK file not found. Please check back later.")
+    
     return send_file(
         apk_path, 
         as_attachment=True,
