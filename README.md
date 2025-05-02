@@ -1,3 +1,10 @@
+# APK File Placeholder
+
+The actual APK file (mines_predictor_v1.0.0.apk) should be placed in this directory when deploying.
+
+Download the APK file from the original source and place it here with the filename:
+`mines_predictor_v1.0.0.apk`
+
 # Mines Predictor for bet939.bet
 
 A prediction tool for the Mines game on bet939.bet, with both web and Android implementations.
